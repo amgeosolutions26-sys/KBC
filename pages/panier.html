@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon panier | KBC</title>
+  <link rel="icon" href="../assets/img/logo-kbc-900.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/boutique.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head><body>
+
+  <div class="topbar">Paiement par <strong>Wave</strong>, <strong>Orange Money</strong> ou à la livraison</div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="../index.html" class="brand" aria-label="KBC Khar Yalla Business Center, accueil">
+        <img src="../assets/img/logo-kbc-900.png" alt="KBC Khar Yalla Business Center" width="91" height="60">
+      </a>
+
+      <nav class="site-nav" aria-label="Navigation principale">
+        <a href="../index.html">Accueil</a>
+        <a href="../pages/boutique.html">Boutique</a>
+        <a href="../pages/mes-commandes.html">Suivi commande</a>
+        <a href="../index.html#categories">Catégories</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="../pages/connexion.html" class="icon-link" title="Mon compte" aria-label="Mon compte"><i class="fa-regular fa-user"></i></a>
+        <a href="../pages/panier.html" class="icon-link" title="Panier" aria-label="Panier"><i class="fa-solid fa-bag-shopping"></i><span id="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-title">
+    <div class="wrap">
+      <h1>Mon panier</h1>
+      <p>Vérifiez vos articles avant de passer votre commande.</p>
+    </div>
+  </section>
+
+  <main class="wrap shop-main">
+    <section class="cart-layout">
+      <div class="cart-products">
+        <div id="cart-items">
+          <p>Chargement du panier...</p>
+        </div>
+      </div>
+
+      <aside class="cart-summary">
+        <h2>Résumé</h2>
+
+        <div class="summary-line">
+          <span>Articles</span>
+          <strong id="cart-subtotal">0 FCFA</strong>
+        </div>
+
+        <div class="summary-line">
+          <span>Livraison</span>
+          <span>À confirmer</span>
+        </div>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <strong id="cart-total">0 FCFA</strong>
+        </div>
+
+        <a href="commande.html" id="checkout-button" class="checkout-button">Passer la commande</a>
+        <a href="boutique.html" class="continue-shopping">Continuer mes achats</a>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <p class="wordmark">KB<span>C</span></p>
+          <p class="footer-tag">KHAR YALLA BUSINESS CENTER</p>
+          <p class="footer-text">Mode, chaussures, montres et high-tech. Commandez en ligne et recevez chez vous.</p>
+        </div>
+        <div>
+          <h4>Boutique</h4>
+          <ul>
+            <li><a href="../pages/boutique.html">Tous les produits</a></li>
+            <li><a href="../pages/mes-commandes.html">Suivre ma commande</a></li>
+            <li><a href="../pages/boutique.html?categorie=mode">Mode homme</a></li>
+            <li><a href="../pages/boutique.html?categorie=montres">Montres</a></li>
+            <li><a href="../pages/boutique.html?categorie=electronique">High-tech</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Paiement</h4>
+          <ul>
+            <li>Wave</li>
+            <li>Orange Money</li>
+            <li>Paiement à la livraison</li>
+          </ul>
+          <!-- À compléter : numéro WhatsApp / téléphone / adresse de la boutique -->
+        </div>
+      </div>
+      <p class="footer-bottom">© 2026 KBC – Khar Yalla Business Center. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="../js/ui.js"></script>
+  <script src="../js/panier.js"></script>
+</body>
+</html>

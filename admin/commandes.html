@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commandes | KBC Admin</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <header class="admin-header">
+    <a href="dashboard.html" class="admin-brand">
+      KBC <span>ADMIN</span>
+    </a>
+
+    <div class="admin-user">
+      <span id="admin-name">Chargement...</span>
+      <button id="logout-button" class="logout-button" type="button">
+        Déconnexion
+      </button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+
+    <aside class="sidebar">
+      <a href="dashboard.html">Tableau de bord</a>
+      <a href="produits.html">Produits</a>
+      <a href="stocks.html">Gestion des stocks</a>
+      <a class="active" href="commandes.html">Commandes</a>
+      <a href="ventes.html">Ventes</a>
+      <a href="clients.html">Clients</a>
+      <a href="statistiques.html">Statistiques</a>
+      <a href="../index.html">Voir la boutique</a>
+    </aside>
+
+    <main class="dashboard-content">
+
+      <h1>Gestion des commandes</h1>
+      <p class="dashboard-subtitle">
+        Consultez les commandes et suivez leur évolution.
+      </p>
+
+      <p id="orders-message" class="orders-message" role="status">
+        Chargement des commandes...
+      </p>
+
+      <section class="orders-panel">
+
+        <div class="orders-toolbar">
+
+          <input
+            type="search"
+            id="search-orders"
+            placeholder="Rechercher : numéro, client, téléphone..."
+            aria-label="Rechercher une commande"
+          >
+
+          <select id="filter-status" aria-label="Filtrer par statut">
+            <option value="tous">Tous les statuts</option>
+            <option value="en_attente">En attente</option>
+            <option value="confirmee">Confirmée</option>
+            <option value="en_preparation">En préparation</option>
+            <option value="expediee">Expédiée</option>
+            <option value="livree">Livrée</option>
+            <option value="annulee">Annulée</option>
+          </select>
+
+          <button type="button" id="refresh-orders" class="primary-button">
+            Actualiser
+          </button>
+
+        </div>
+
+        <div class="table-wrapper">
+
+          <table class="orders-table">
+
+            <thead>
+              <tr>
+                <th>N° commande</th>
+                <th>Client</th>
+                <th>Date</th>
+                <th>Montant</th>
+                <th>Paiement</th>
+                <th>Statut</th>
+                <th>Articles</th>
+              </tr>
+            </thead>
+
+            <tbody id="orders-table-body">
+              <tr>
+                <td colspan="7">Chargement...</td>
+              </tr>
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/commande.js"></script>
+
+</body>
+</html>

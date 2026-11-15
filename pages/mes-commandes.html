@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suivre ma commande | KBC</title>
+  <link rel="icon" href="../assets/img/logo-kbc-900.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/boutique.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head><body>
+
+  <div class="topbar">Paiement par <strong>Wave</strong>, <strong>Orange Money</strong> ou à la livraison</div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="../index.html" class="brand" aria-label="KBC Khar Yalla Business Center, accueil">
+        <img src="../assets/img/logo-kbc-900.png" alt="KBC Khar Yalla Business Center" width="91" height="60">
+      </a>
+
+      <nav class="site-nav" aria-label="Navigation principale">
+        <a href="../index.html">Accueil</a>
+        <a href="../pages/boutique.html">Boutique</a>
+        <a href="../pages/mes-commandes.html" class="active" aria-current="page">Suivi commande</a>
+        <a href="../index.html#categories">Catégories</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="../pages/connexion.html" class="icon-link" title="Mon compte" aria-label="Mon compte"><i class="fa-regular fa-user"></i></a>
+        <a href="../pages/panier.html" class="icon-link" title="Panier" aria-label="Panier"><i class="fa-solid fa-bag-shopping"></i><span id="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-title">
+    <div class="wrap">
+      <h1>Suivre ma commande</h1>
+      <p>Consultez l'état de votre commande avec votre numéro de téléphone et le code personnel reçu à la confirmation.</p>
+    </div>
+  </section>
+
+  <main class="wrap shop-main">
+    <div class="track-layout">
+
+      <section class="track-form-card">
+        <h2>Retrouver ma commande</h2>
+        <p class="track-hint">Les deux informations sont nécessaires pour protéger vos données.</p>
+
+        <form id="track-form" novalidate>
+          <div class="form-group">
+            <label for="track-phone">Numéro de téléphone</label>
+            <input type="tel" id="track-phone" name="telephone" placeholder="Ex. : 77 123 45 67" autocomplete="tel" inputmode="tel" required>
+            <span class="field-help">Celui utilisé lors de la commande.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="track-code">Code personnel de suivi</label>
+            <input type="text" id="track-code" name="code" placeholder="KBC-XXXXXXXX…" autocomplete="off" autocapitalize="characters" spellcheck="false" required>
+            <span class="field-help">Affiché à la fin de votre commande, commence par KBC-.</span>
+          </div>
+
+          <div id="track-message" role="status" aria-live="polite"></div>
+
+          <button type="submit" id="track-submit" class="checkout-button">Consulter ma commande</button>
+        </form>
+      </section>
+
+      <section id="track-output" aria-live="polite">
+        <div class="track-empty">
+          <h2>Où trouver mon code ?</h2>
+          <ul>
+            <li>Il s'affiche sur la page de confirmation, juste après votre commande.</li>
+            <li>Il n'est pas récupérable : KBC n'en conserve qu'une empreinte.</li>
+            <li>Gardez-le dans vos notes ou copiez-le avec le bouton « Copier mon code ».</li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <p class="wordmark">KB<span>C</span></p>
+          <p class="footer-tag">KHAR YALLA BUSINESS CENTER</p>
+          <p class="footer-text">Mode, chaussures, montres et high-tech. Commandez en ligne et recevez chez vous.</p>
+        </div>
+        <div>
+          <h4>Boutique</h4>
+          <ul>
+            <li><a href="../pages/boutique.html">Tous les produits</a></li>
+            <li><a href="../pages/mes-commandes.html">Suivre ma commande</a></li>
+            <li><a href="../pages/boutique.html?categorie=mode">Mode homme</a></li>
+            <li><a href="../pages/boutique.html?categorie=montres">Montres</a></li>
+            <li><a href="../pages/boutique.html?categorie=electronique">High-tech</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Paiement</h4>
+          <ul>
+            <li>Wave</li>
+            <li>Orange Money</li>
+            <li>Paiement à la livraison</li>
+          </ul>
+          <!-- À compléter : numéro WhatsApp / téléphone / adresse de la boutique -->
+        </div>
+      </div>
+      <p class="footer-bottom">© 2026 KBC – Khar Yalla Business Center. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/mes-commandes.js"></script>
+</body>
+</html>

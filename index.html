@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KBC – Khar Yalla Business Center : mode, chaussures, montres et high-tech. Commandez en ligne, payez par Wave, Orange Money ou à la livraison.">
+  <title>KBC | Khar Yalla Business Center</title>
+  <link rel="icon" href="assets/img/logo-kbc-900.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head><body>
+
+  <!--<div class="topbar">Paiement par <strong>Wave</strong>, <strong>Orange Money</strong> ou à la livraison</div>-->
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="index.html" class="brand" aria-label="KBC Khar Yalla Business Center, accueil">
+        <img src="assets/img/logo-kbc-900.png" alt="KBC Khar Yalla Business Center" width="91" height="60">
+      </a>
+
+      <nav class="site-nav" aria-label="Navigation principale">
+        <a href="index.html" class="active" aria-current="page">Accueil</a>
+        <a href="pages/boutique.html">Boutique</a>
+        <a href="pages/mes-commandes.html">Suivi commande</a>
+        <a href="index.html#categories">Catégories</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="pages/connexion.html" class="icon-link" title="Mon compte" aria-label="Mon compte"><i class="fa-regular fa-user"></i></a>
+        <a href="pages/panier.html" class="icon-link" title="Panier" aria-label="Panier"><i class="fa-solid fa-bag-shopping"></i><span id="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <svg class="hero-swoosh" viewBox="0 0 1440 700" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#ff6a00"/><stop offset=".55" stop-color="#ffb13b"/><stop offset="1" stop-color="#ff6a00"/>
+          </linearGradient>
+        </defs>
+        <path d="M0 650 C 440 610, 990 540, 1440 400 C 1010 590, 450 690, 0 700 Z" fill="url(#g1)"/>
+        <path d="M0 690 C 480 665, 1010 600, 1440 470 C 1030 640, 480 720, 0 700 Z" fill="#ffffff" opacity=".18"/>
+      </svg>
+
+      <div class="hero-wall" id="hero-wall" aria-hidden="true">
+        <div class="wall-tilt" id="wall-tilt"></div>
+      </div>
+
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1>Votre style, votre technologie, au même endroit.</h1>
+          <p>Vêtements, chaussures, montres, téléphones et accessoires. Choisissez en ligne, on s'occupe de la livraison.</p>
+          <div class="hero-actions">
+            <a href="pages/boutique.html" class="btn btn-primary"><span>Voir la boutique</span></a>
+            <a href="#categories" class="btn btn-line"><span>Parcourir les catégories</span></a>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="wall-toggle" id="wall-toggle" aria-pressed="false"><span>Pause</span></button>
+    </section>
+
+    <section class="section section-stone" id="categories">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Nos catégories</h2>
+            <p>Choisissez un rayon pour voir uniquement ce qui vous intéresse.</p>
+          </div>
+        </div>
+
+        <div class="category-grid">
+          <a href="pages/boutique.html?categorie=mode" class="category-card"><h3>Mode homme</h3><i class="fa-solid fa-shirt"></i></a>
+          <a href="pages/boutique.html?categorie=chaussures" class="category-card"><h3>Chaussures</h3><i class="fa-solid fa-shoe-prints"></i></a>
+          <a href="pages/boutique.html?categorie=montres" class="category-card"><h3>Montres</h3><i class="fa-regular fa-clock"></i></a>
+          <a href="pages/boutique.html?categorie=electronique" class="category-card"><h3>High-tech</h3><i class="fa-solid fa-mobile-screen"></i></a>
+          <a href="pages/boutique.html?categorie=maillots" class="category-card"><h3>Maillots</h3><i class="fa-solid fa-futbol"></i></a>
+          <a href="pages/boutique.html?categorie=accessoires" class="category-card"><h3>Accessoires</h3><i class="fa-solid fa-glasses"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Derniers arrivages</h2>
+            <p>Les produits ajoutés récemment à la boutique.</p>
+          </div>
+          <a href="pages/boutique.html" class="link-more">Tous les produits</a>
+        </div>
+
+        <div id="featured-products" class="product-grid" aria-live="polite">
+          <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section steps-section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Commander en 3 étapes</h2>
+            <p>Pas besoin de compte pour passer une commande.</p>
+          </div>
+        </div>
+        <ol class="steps">
+          <li><h3>Choisissez</h3><p>Ajoutez vos produits au panier depuis la boutique.</p></li>
+          <li><h3>Renseignez la livraison</h3><p>Indiquez votre nom, votre téléphone et votre adresse.</p></li>
+          <li><h3>Payez comme vous voulez</h3><p>Wave, Orange Money ou à la réception de votre commande.</p></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <p class="wordmark">KB<span>C</span></p>
+          <p class="footer-tag">KHAR YALLA BUSINESS CENTER</p>
+          <p class="footer-text">Mode, chaussures, montres et high-tech. Commandez en ligne et recevez chez vous.</p>
+        </div>
+        <div>
+          <h4>Boutique</h4>
+          <ul>
+            <li><a href="pages/boutique.html">Tous les produits</a></li>
+            <li><a href="pages/mes-commandes.html">Suivre ma commande</a></li>
+            <li><a href="pages/boutique.html?categorie=mode">Mode homme</a></li>
+            <li><a href="pages/boutique.html?categorie=montres">Montres</a></li>
+            <li><a href="pages/boutique.html?categorie=electronique">High-tech</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Paiement</h4>
+          <ul>
+            <li>Wave</li>
+            <li>Orange Money</li>
+            <li>Paiement à la livraison</li>
+          </ul>
+          <!-- À compléter : numéro WhatsApp / téléphone / adresse de la boutique -->
+        </div>
+      </div>
+      <p class="footer-bottom">© 2026 KBC – Khar Yalla Business Center. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/produits.js"></script>
+
+</body>
+</html>

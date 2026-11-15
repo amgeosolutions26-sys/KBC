@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion des stocks | KBC</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <header class="admin-header">
+    <a href="dashboard.html" class="admin-brand">KBC <span>ADMIN</span></a>
+    <div class="admin-user">
+      <span id="admin-name">Administration</span>
+      <button id="logout-button" class="logout-button">Déconnexion</button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <a href="dashboard.html">Tableau de bord</a>
+      <a href="produits.html">Produits</a>
+      <a href="stocks.html" class="active">Gestion des stocks</a>
+      <a href="commandes.html">Commandes</a>
+      <a href="ventes.html">Ventes</a>
+      <a href="clients.html">Clients</a>
+      <a href="statistiques.html">Statistiques</a>
+      <a href="../index.html">Voir la boutique</a>
+    </aside>
+
+    <main class="dashboard-content">
+      <h1>Gestion des stocks</h1>
+      <p class="dashboard-subtitle">
+        Suivez les quantités et enregistrez les mouvements de marchandises.
+      </p>
+
+      <p id="stock-message" role="status"></p>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <p>Références en stock</p>
+          <h2 id="stock-products">—</h2>
+        </article>
+        <article class="stat-card warning">
+          <p>Stocks faibles</p>
+          <h2 id="stock-low">—</h2>
+        </article>
+        <article class="stat-card danger">
+          <p>Ruptures</p>
+          <h2 id="stock-empty">—</h2>
+        </article>
+      </section>
+
+      <section class="product-form-section">
+        <h2>Enregistrer un mouvement</h2>
+
+        <form id="movement-form">
+          <div class="product-form-grid">
+            <div>
+              <label for="movement-product">Produit *</label>
+              <select id="movement-product" required>
+                <option value="">Chargement...</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="movement-type">Type de mouvement *</label>
+              <select id="movement-type" required>
+                <option value="entree">Entrée de stock</option>
+                <option value="sortie">Sortie de stock</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="movement-quantity">Quantité *</label>
+              <input id="movement-quantity" type="number"
+                     min="1" step="1" required>
+            </div>
+
+            <div>
+              <label for="movement-reason">Motif</label>
+              <input id="movement-reason" type="text"
+                     maxlength="500"
+                     placeholder="Ex. Réapprovisionnement">
+            </div>
+          </div>
+
+          <button type="submit" id="movement-button">
+            Enregistrer le mouvement
+          </button>
+        </form>
+      </section>
+
+      <section class="dashboard-section">
+        <h2>État actuel des stocks</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Produit</th>
+                <th>Quantité disponible</th>
+                <th>Seuil d'alerte</th>
+                <th>État</th>
+              </tr>
+            </thead>
+            <tbody id="current-stock-table">
+              <tr><td colspan="4">Chargement...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="dashboard-section">
+        <h2>Historique des mouvements</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Produit</th>
+                <th>Type</th>
+                <th>Quantité</th>
+                <th>Motif</th>
+              </tr>
+            </thead>
+            <tbody id="movement-history">
+              <tr><td colspan="5">Chargement...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/stocks.js"></script>
+</body>
+</html>

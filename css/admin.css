@@ -1,0 +1,566 @@
+:root {
+  --orange: #ff7900;
+  --noir: #111111;
+  --blanc: #ffffff;
+  --gris: #f4f4f4;
+  --texte: #333333;
+  --rouge: #dc3545;
+  --vert: #198754;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--gris);
+  color: var(--texte);
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-container {
+  background: var(--blanc);
+  width: 100%;
+  max-width: 420px;
+  padding: 35px;
+  border-radius: 12px;
+  box-shadow: 0 5px 25px #00000012;
+}
+
+.login-logo {
+  color: var(--orange);
+  font-size: 42px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.login-container h1,
+.login-container > p {
+  text-align: center;
+}
+
+.login-container label {
+  display: block;
+  margin: 18px 0 7px;
+  font-weight: bold;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.login-container button {
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--orange);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-container button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+#login-message {
+  color: var(--rouge);
+  font-size: 14px;
+}
+
+.back-link {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  color: var(--texte);
+}
+
+.admin-header {
+  background: var(--noir);
+  color: white;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-brand {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.admin-brand span {
+  color: var(--orange);
+  font-size: 13px;
+}
+
+.admin-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logout-button {
+  border: 0;
+  border-radius: 5px;
+  background: var(--orange);
+  color: white;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.admin-layout {
+  display: flex;
+  min-height: calc(100vh - 60px);
+}
+
+.sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background: var(--noir);
+  padding: 20px 12px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 13px;
+  margin-bottom: 6px;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: var(--orange);
+}
+
+.dashboard-content {
+  flex: 1;
+  min-width: 0;
+  padding: 30px;
+}
+
+.dashboard-content h1 {
+  color: var(--noir);
+  margin-bottom: 5px;
+}
+
+.dashboard-subtitle {
+  color: #777;
+  margin-bottom: 25px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+}
+
+.stat-card {
+  background: white;
+  padding: 22px;
+  border-radius: 9px;
+  border-left: 5px solid var(--orange);
+  box-shadow: 0 2px 10px #00000008;
+}
+
+.stat-card p {
+  margin: 0;
+  color: #666;
+}
+
+.stat-card h2 {
+  margin: 15px 0 0;
+  font-size: 30px;
+  color: var(--noir);
+}
+
+.stat-card.warning {
+  border-left-color: #e0a800;
+}
+
+.stat-card.danger {
+  border-left-color: var(--rouge);
+}
+
+.dashboard-section {
+  margin-top: 30px;
+  padding: 22px;
+  background: white;
+  border-radius: 9px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-heading a {
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  padding: 13px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #f8f8f8;
+}
+
+.stock-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.badge-success {
+  background: #d9f2e3;
+  color: var(--vert);
+}
+
+.badge-warning {
+  background: #fff0c2;
+  color: #946c00;
+}
+
+.badge-danger {
+  background: #f8d7da;
+  color: var(--rouge);
+}
+
+#dashboard-message {
+  color: var(--rouge);
+}
+
+@media (max-width: 750px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    gap: 5px;
+  }
+
+  .sidebar a {
+    white-space: nowrap;
+  }
+
+  .dashboard-content {
+    padding: 18px;
+  }
+
+  .admin-header {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .admin-user {
+    flex-wrap: wrap;
+  }
+}
+
+.product-form-section {
+  background: white;
+  padding: 25px;
+  margin: 25px 0;
+  border-radius: 9px;
+}
+
+.product-form-section h2 {
+  margin-top: 0;
+}
+
+.product-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.product-form-grid label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: bold;
+}
+
+.product-form-grid input,
+.product-form-grid select,
+.product-form-grid textarea,
+#product-search {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.product-form-grid small {
+  display: block;
+  color: #777;
+  margin-top: 7px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.image-preview {
+  display: block;
+  max-width: 180px;
+  max-height: 180px;
+  object-fit: contain;
+  margin-top: 12px;
+  border-radius: 8px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.form-actions button,
+.action-button {
+  border: none;
+  background: var(--orange);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-actions button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+#cancel-edit-button,
+.action-button.secondary {
+  background: #555;
+}
+
+.action-button {
+  margin: 3px;
+  white-space: nowrap;
+}
+
+.product-thumbnail {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #eee;
+}
+
+@media (max-width: 650px) {
+  .product-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .section-heading {
+    flex-wrap: wrap;
+  }
+
+  #product-search {
+    max-width: 100%;
+  }
+}
+
+#movement-form {
+  margin-top: 20px;
+}
+
+#movement-button {
+  margin-top: 20px;
+  padding: 13px 20px;
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#movement-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+#stock-message {
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+#movement-history tr td:nth-child(3) {
+  font-weight: bold;
+}
+
+
+/* ==================================
+   GESTION DES COMMANDES KBC
+================================== */
+
+.orders-panel {
+  margin-top: 24px;
+  padding: 22px;
+  background: var(--blanc);
+  border-radius: 9px;
+  box-shadow: 0 2px 10px #00000008;
+}
+
+.orders-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.orders-toolbar input,
+.orders-toolbar select,
+.order-status-select {
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  color: var(--texte);
+  font: inherit;
+}
+
+.orders-toolbar input {
+  flex: 1 1 260px;
+}
+
+.orders-toolbar select {
+  flex: 0 1 190px;
+}
+
+.primary-button {
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 17px;
+  background: var(--orange);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.primary-button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.orders-message {
+  min-height: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.orders-table {
+  min-width: 900px;
+}
+
+.orders-table td {
+  vertical-align: middle;
+}
+
+.order-phone {
+  display: block;
+  margin-top: 5px;
+  color: #777;
+}
+
+.order-status-select {
+  max-width: 175px;
+  cursor: pointer;
+}
+
+.order-details summary {
+  color: #bd5a00;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.order-details ul {
+  min-width: 190px;
+  padding-left: 18px;
+  line-height: 1.6;
+}
+
+.order-details p {
+  min-width: 190px;
+  color: #777;
+}
+
+@media (max-width: 760px) {
+  .admin-layout {
+    display: block;
+  }
+
+  .sidebar {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px;
+  }
+
+  .sidebar a {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    margin: 0 5px 0 0;
+  }
+
+  .dashboard-content {
+    padding: 18px;
+  }
+
+  .orders-panel {
+    padding: 14px;
+  }
+}

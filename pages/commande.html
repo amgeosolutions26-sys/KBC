@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finaliser ma commande | KBC</title>
+  <link rel="icon" href="../assets/img/logo-kbc-900.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/boutique.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head><body>
+
+  <div class="topbar">Paiement par <strong>Wave</strong>, <strong>Orange Money</strong> ou à la livraison</div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="../index.html" class="brand" aria-label="KBC Khar Yalla Business Center, accueil">
+        <img src="../assets/img/logo-kbc-900.png" alt="KBC Khar Yalla Business Center" width="91" height="60">
+      </a>
+
+      <nav class="site-nav" aria-label="Navigation principale">
+        <a href="../index.html">Accueil</a>
+        <a href="../pages/boutique.html">Boutique</a>
+        <a href="../pages/mes-commandes.html">Suivi commande</a>
+        <a href="../index.html#categories">Catégories</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="../pages/connexion.html" class="icon-link" title="Mon compte" aria-label="Mon compte"><i class="fa-regular fa-user"></i></a>
+        <a href="../pages/panier.html" class="icon-link" title="Panier" aria-label="Panier"><i class="fa-solid fa-bag-shopping"></i><span id="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-title">
+    <div class="wrap">
+      <h1>Finaliser ma commande</h1>
+      <p>Renseignez vos informations pour confirmer votre commande.</p>
+    </div>
+  </section>
+
+  <main class="wrap shop-main checkout-page">
+    <div class="checkout-layout">
+
+      <section class="checkout-form-section">
+        <h2>Informations de livraison</h2>
+
+        <form id="checkout-form">
+
+          <div class="form-group">
+            <label for="nom_client">Nom complet *</label>
+            <input type="text" id="nom_client" name="nom_client" placeholder="Votre nom et prénom" autocomplete="name" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telephone">Numéro de téléphone *</label>
+              <input type="tel" id="telephone" name="telephone" placeholder="Ex. : 77 123 45 67" autocomplete="tel" required>
+            </div>
+
+            <div class="form-group">
+              <label for="ville">Ville *</label>
+              <input type="text" id="ville" name="ville" placeholder="Ex. : Thiès, Dakar, Mbour..." autocomplete="address-level2" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="adresse">Adresse de livraison *</label>
+            <textarea id="adresse" name="adresse" rows="4" placeholder="Région, ville, quartier, rue ou indications utiles..." autocomplete="street-address" required></textarea>
+          </div>
+
+          <h2 class="payment-heading">Mode de paiement</h2>
+
+          <div class="payment-options">
+            <label class="payment-option">
+              <input type="radio" name="mode_paiement" value="wave" required>
+              <span><strong>Wave</strong><small>Paiement par Wave</small></span>
+            </label>
+
+            <label class="payment-option">
+              <input type="radio" name="mode_paiement" value="orange_money" required>
+              <span><strong>Orange Money</strong><small>Paiement par Orange Money</small></span>
+            </label>
+
+            <label class="payment-option">
+              <input type="radio" name="mode_paiement" value="livraison" required>
+              <span><strong>Paiement à la livraison</strong><small>Règlement à la réception de votre commande</small></span>
+            </label>
+          </div>
+
+          <p class="payment-notice">
+            Pour Wave et Orange Money, les modalités de paiement seront
+            communiquées après confirmation de la commande.
+          </p>
+
+          <div id="checkout-message" role="status" aria-live="polite"></div>
+
+          <button type="submit" id="submit-order">Confirmer ma commande</button>
+
+        </form>
+      </section>
+
+      <aside class="checkout-summary">
+        <h2>Votre commande</h2>
+
+        <div id="checkout-items"></div>
+
+        <div class="checkout-total">
+          <span>Total à payer</span>
+          <strong id="checkout-total">0 FCFA</strong>
+        </div>
+
+        <a href="panier.html" class="back-to-cart">Modifier mon panier</a>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <p class="wordmark">KB<span>C</span></p>
+          <p class="footer-tag">KHAR YALLA BUSINESS CENTER</p>
+          <p class="footer-text">Mode, chaussures, montres et high-tech. Commandez en ligne et recevez chez vous.</p>
+        </div>
+        <div>
+          <h4>Boutique</h4>
+          <ul>
+            <li><a href="../pages/boutique.html">Tous les produits</a></li>
+            <li><a href="../pages/mes-commandes.html">Suivre ma commande</a></li>
+            <li><a href="../pages/boutique.html?categorie=mode">Mode homme</a></li>
+            <li><a href="../pages/boutique.html?categorie=montres">Montres</a></li>
+            <li><a href="../pages/boutique.html?categorie=electronique">High-tech</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Paiement</h4>
+          <ul>
+            <li>Wave</li>
+            <li>Orange Money</li>
+            <li>Paiement à la livraison</li>
+          </ul>
+          <!-- À compléter : numéro WhatsApp / téléphone / adresse de la boutique -->
+        </div>
+      </div>
+      <p class="footer-bottom">© 2026 KBC – Khar Yalla Business Center. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/checkout.js"></script>
+</body>
+</html>

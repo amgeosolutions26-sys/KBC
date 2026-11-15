@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de bord | KBC</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <header class="admin-header">
+    <a href="dashboard.html" class="admin-brand">KBC <span>ADMIN</span></a>
+    <div class="admin-user">
+      <span id="admin-name">Chargement...</span>
+      <button id="logout-button" class="logout-button">Déconnexion</button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <a class="active" href="dashboard.html">Tableau de bord</a>
+      <a href="produits.html">Produits</a>
+      <a href="stocks.html">Gestion des stocks</a>
+      <a href="commandes.html">Commandes</a>
+      <a href="ventes.html">Ventes</a>
+      <a href="clients.html">Clients</a>
+      <a href="statistiques.html">Statistiques</a>
+      <a href="../index.html">Voir la boutique</a>
+    </aside>
+
+    <main class="dashboard-content">
+      <h1>Tableau de bord</h1>
+      <p class="dashboard-subtitle">Vue générale de votre boutique KBC.</p>
+
+      <p id="dashboard-message" role="status"></p>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <p>Produits actifs</p>
+          <h2 id="total-products">—</h2>
+        </article>
+
+        <article class="stat-card">
+          <p>Catégories actives</p>
+          <h2 id="total-categories">—</h2>
+        </article>
+
+        <article class="stat-card">
+          <p>Articles en stock</p>
+          <h2 id="total-units">—</h2>
+        </article>
+
+        <article class="stat-card warning">
+          <p>Stocks faibles</p>
+          <h2 id="low-stock">—</h2>
+        </article>
+
+        <article class="stat-card danger">
+          <p>Ruptures de stock</p>
+          <h2 id="out-of-stock">—</h2>
+        </article>
+      </section>
+
+      <section class="dashboard-section">
+        <div class="section-heading">
+          <h2>État des stocks</h2>
+          <a href="stocks.html">Gérer les stocks</a>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Seuil d'alerte</th>
+                <th>État</th>
+              </tr>
+            </thead>
+            <tbody id="stock-table">
+              <tr><td colspan="4">Chargement...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion des produits | KBC</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <header class="admin-header">
+    <a href="dashboard.html" class="admin-brand">KBC <span>ADMIN</span></a>
+    <div class="admin-user">
+      <span id="admin-name">Administration</span>
+      <button id="logout-button" class="logout-button">Déconnexion</button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <a href="dashboard.html">Tableau de bord</a>
+      <a href="produits.html" class="active">Produits</a>
+      <a href="stocks.html">Gestion des stocks</a>
+      <a href="commandes.html">Commandes</a>
+      <a href="ventes.html">Ventes</a>
+      <a href="clients.html">Clients</a>
+      <a href="statistiques.html">Statistiques</a>
+      <a href="../index.html">Voir la boutique</a>
+    </aside>
+
+    <main class="dashboard-content">
+      <h1>Gestion des produits</h1>
+      <p class="dashboard-subtitle">
+        Ajoutez et gérez les articles de votre boutique.
+      </p>
+
+      <p id="product-message" role="status"></p>
+
+      <section class="product-form-section">
+        <h2 id="form-title">Ajouter un produit</h2>
+
+        <form id="product-form">
+          <input type="hidden" id="product-id">
+
+          <div class="product-form-grid">
+            <div>
+              <label for="product-name">Nom du produit *</label>
+              <input id="product-name" type="text" required maxlength="200">
+            </div>
+
+            <div>
+              <label for="product-category">Catégorie *</label>
+              <select id="product-category" required>
+                <option value="">Chargement des catégories...</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="product-price-buy">Prix d'achat (FCFA) *</label>
+              <input id="product-price-buy" type="number"
+                     min="0" step="1" required>
+            </div>
+
+            <div>
+              <label for="product-price">Prix de vente (FCFA) *</label>
+              <input id="product-price" type="number"
+                     min="0" step="1" required>
+            </div>
+
+            <div>
+              <label for="product-quantity">Quantité en stock *</label>
+              <input id="product-quantity" type="number"
+                     min="0" step="1" required value="0">
+            </div>
+
+            <div>
+              <label for="product-threshold">Seuil d'alerte</label>
+              <input id="product-threshold" type="number"
+                     min="0" step="1" value="5" required>
+            </div>
+
+            <div class="full-width">
+              <label for="product-description">Description</label>
+              <textarea id="product-description" rows="4"
+                        maxlength="5000"></textarea>
+            </div>
+
+            <div class="full-width">
+              <label for="product-image">Photo du produit</label>
+              <input id="product-image" type="file"
+                     accept="image/jpeg,image/png,image/webp">
+              <small>Formats acceptés : JPG, PNG et WEBP. Taille maximale : 5 Mo.</small>
+              <img id="image-preview" class="image-preview"
+                   alt="Aperçu de la photo" hidden>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="save-product-button">
+              Enregistrer le produit
+            </button>
+            <button type="button" id="cancel-edit-button" hidden>
+              Annuler la modification
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="dashboard-section">
+        <div class="section-heading">
+          <h2>Liste des produits</h2>
+          <input type="search" id="product-search"
+                 placeholder="Rechercher un produit...">
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Produit</th>
+                <th>Catégorie</th>
+                <th>Prix de vente</th>
+                <th>Stock</th>
+                <th>État</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="products-table">
+              <tr><td colspan="7">Chargement...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/produits-admin.js"></script>
+</body>
+</html>
