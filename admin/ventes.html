@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventes | KBC Admin</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <header class="admin-header">
+    <a href="dashboard.html" class="admin-brand">KBC <span>ADMIN</span></a>
+    <div class="admin-user">
+      <span id="admin-name" style="display: none;">Chargement...</span>
+      <button id="logout-button" class="logout-button" type="button">Déconnexion</button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <a href="dashboard.html">Tableau de bord</a>
+      <a href="produits.html">Produits</a>
+      <a href="stocks.html">Gestion des stocks</a>
+      <a href="commandes.html">Commandes</a>
+      <a class="active" href="ventes.html">Ventes</a>
+      <a href="clients.html">Clients</a>
+      <a href="statistiques.html">Statistiques</a>
+      <a href="../index.html">Voir la boutique</a>
+    </aside>
+
+    <main class="dashboard-content">
+      <div class="st-print-title">
+        <strong>KBC – Khar Yalla Business Center</strong>
+        <span id="print-subtitle"></span>
+      </div>
+
+      <h1>Ventes</h1>
+      <p class="dashboard-subtitle">Journal des ventes, montants encaissés et produits qui se vendent le mieux.</p>
+
+      <p id="sales-message" class="orders-message" role="status">Chargement des ventes...</p>
+
+      <div class="st-toolbar">
+        <div class="st-periods" role="group" aria-label="Période">
+          <button type="button" data-periode="7" aria-pressed="false">7 jours</button>
+          <button type="button" data-periode="30" aria-pressed="true">30 jours</button>
+          <button type="button" data-periode="90" aria-pressed="false">3 mois</button>
+          <button type="button" data-periode="365" aria-pressed="false">12 mois</button>
+          <button type="button" data-periode="tout" aria-pressed="false">Tout</button>
+        </div>
+
+        <div class="vt-dates">
+          <label>Du <input type="date" id="date-from"></label>
+          <label>au <input type="date" id="date-to"></label>
+        </div>
+
+        <div class="st-actions">
+          <button type="button" class="st-btn light" id="export-csv">Exporter CSV</button>
+          <button type="button" class="st-btn" id="print-report">Imprimer / PDF</button>
+        </div>
+      </div>
+
+      <div class="orders-toolbar vt-filters">
+        <input type="search" id="search-sales" placeholder="Rechercher : référence, client, téléphone, produit..." aria-label="Rechercher une vente">
+
+        <select id="filter-type" aria-label="Type de ventes">
+          <option value="ventes">Ventes (hors annulées)</option>
+          <option value="livrees">Livrées uniquement</option>
+          <option value="annulees">Annulées</option>
+        </select>
+
+        <select id="filter-paiement" aria-label="Mode de paiement">
+          <option value="tous">Tous les paiements</option>
+          <option value="wave">Wave</option>
+          <option value="orange_money">Orange Money</option>
+          <option value="livraison">Paiement à la livraison</option>
+        </select>
+
+        <select id="sort-sales" aria-label="Trier par">
+          <option value="date">Plus récentes d'abord</option>
+          <option value="montant">Montant décroissant</option>
+        </select>
+      </div>
+
+      <div class="st-empty" id="empty-state" hidden>
+        <h2>Aucune vente ne correspond</h2>
+        <p>Modifiez la période, le type de ventes ou la recherche pour voir des résultats.</p>
+      </div>
+
+      <div id="sales-body">
+
+        <section class="st-kpis" aria-label="Résumé des ventes">
+          <article class="st-kpi main">
+            <p id="kpi-label">Montant des ventes</p>
+            <h2 id="kpi-total">—</h2>
+            <span class="st-sub" id="kpi-total-sub"></span>
+          </article>
+          <article class="st-kpi">
+            <p>Nombre de commandes</p>
+            <h2 id="kpi-count">—</h2>
+            <span class="st-sub" id="kpi-count-sub"></span>
+          </article>
+          <article class="st-kpi">
+            <p>Panier moyen</p>
+            <h2 id="kpi-avg">—</h2>
+            <span class="st-sub">montant moyen par commande</span>
+          </article>
+          <article class="st-kpi">
+            <p>Livrées</p>
+            <h2 id="kpi-delivered">—</h2>
+            <span class="st-sub" id="kpi-delivered-sub"></span>
+          </article>
+          <article class="st-kpi">
+            <p>En cours de traitement</p>
+            <h2 id="kpi-pending">—</h2>
+            <span class="st-sub" id="kpi-pending-sub"></span>
+          </article>
+          <article class="st-kpi">
+            <p>Articles vendus</p>
+            <h2 id="kpi-items">—</h2>
+            <span class="st-sub">quantité totale</span>
+          </article>
+        </section>
+
+        <section class="st-grid">
+          <article class="st-card c12">
+            <div class="st-card-head"><h2>Produits les plus vendus</h2><span class="st-note">classés par montant de ventes</span></div>
+            <div id="top-products" class="st-bars vt-bars-2"></div>
+          </article>
+
+          <article class="st-card c12">
+            <div class="st-card-head">
+              <h2>Journal des ventes</h2>
+              <span class="st-note" id="table-note"></span>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="orders-table vt-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Référence</th>
+                    <th>Client</th>
+                    <th>Articles</th>
+                    <th>Paiement</th>
+                    <th>Statut</th>
+                    <th class="vt-right">Montant</th>
+                  </tr>
+                </thead>
+                <tbody id="sales-table-body"></tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="6" id="foot-label">Total</td>
+                    <td class="vt-right" id="foot-total">—</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <div class="vt-pager" id="pager">
+              <button type="button" class="st-btn light" id="page-prev">Précédent</button>
+              <span id="page-info"></span>
+              <button type="button" class="st-btn light" id="page-next">Suivant</button>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/ventes.js"></script>
+</body>
+</html>

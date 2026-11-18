@@ -1,4 +1,3 @@
-
 const adminName = document.getElementById("admin-name");
 const ordersMessage = document.getElementById("orders-message");
 const ordersTableBody = document.getElementById("orders-table-body");
@@ -7,6 +6,26 @@ const statusFilter = document.getElementById("filter-status");
 const refreshButton = document.getElementById("refresh-orders");
 
 let toutesLesCommandes = [];
+
+// Numéro d'ordre affiché : 1, 2, 3... (du plus ancien au plus récent).
+// Recalculé à chaque chargement : il suit donc les suppressions de commandes.
+// Il ne modifie rien dans la base de données.
+let numerosAffiches = new Map();
+
+function calculerNumerosAffiches() {
+  numerosAffiches = new Map(
+    [...toutesLesCommandes]
+      .sort((a, b) =>
+        new Date(a.created_at) - new Date(b.created_at) ||
+        (a.numero || 0) - (b.numero || 0)
+      )
+      .map((commande, index) => [commande.id, index + 1])
+  );
+}
+
+function numeroOrdre(commande) {
+  return numerosAffiches.get(commande.id) ?? commande.numero ?? commande.id.slice(0, 8);
+}
 
 const statuts = {
   en_attente: "En attente",
@@ -89,7 +108,7 @@ function creerSelectStatut(commande) {
 
   select.setAttribute(
     "aria-label",
-    `Statut de la commande ${commande.numero}`
+    `Statut de la commande n°${numeroOrdre(commande)}`
   );
 
   Object.entries(statuts).forEach(([valeur, libelle]) => {
@@ -110,7 +129,7 @@ function creerSelectStatut(commande) {
     if (
       nouveauStatut === "annulee" &&
       !window.confirm(
-        `Confirmer l'annulation de la commande ${commande.numero} ?\n\nLe stock des articles sera automatiquement restitué.`
+        `Confirmer l'annulation de la commande n°${numeroOrdre(commande)} ?\n\nLe stock des articles sera automatiquement restitué.`
       )
     ) {
       select.value = ancienStatut;
@@ -119,7 +138,7 @@ function creerSelectStatut(commande) {
 
     select.disabled = true;
     ordersMessage.textContent =
-      `Mise à jour de la commande ${commande.numero}...`;
+      `Mise à jour de la commande n°${numeroOrdre(commande)}...`;
 
     try {
       const { error } = await db
@@ -133,8 +152,8 @@ function creerSelectStatut(commande) {
 
       ordersMessage.textContent =
       nouveauStatut === "annulee"
-      ? `Commande ${commande.numero} annulée. Le stock a été restitué.`
-      : `Le statut de la commande ${commande.numero} a été mis à jour.`;
+      ? `Commande n°${numeroOrdre(commande)} annulée. Le stock a été restitué.`
+      : `Le statut de la commande n°${numeroOrdre(commande)} a été mis à jour.`;
 
     } catch (error) {
       console.error("Erreur de mise à jour :", error);
@@ -351,7 +370,8 @@ function afficherDetailsCommande(commande) {
   }
 
   ajouterSection("Informations de la commande", [
-    `Numéro : ${numero}`,
+    `N° d'ordre : ${numeroOrdre(commande)}`,
+    `Référence : ${numero}`,
     `Date : ${formaterDate(commande.created_at)}`,
     `Statut : ${statuts[commande.statut] || commande.statut || "—"}`
   ]);
@@ -453,13 +473,17 @@ function afficherCommandes(commandes) {
     const row = document.createElement("tr");
 
     // Numéro
-    row.appendChild(
-      creerCellule(
-        commande.numero
-          ? `KBC-${commande.numero}`
-          : commande.id.slice(0, 8)
-      )
-    );
+    const numeroCell = document.createElement("td");
+
+    const numeroOrdreTexte = document.createElement("strong");
+    numeroOrdreTexte.textContent = `N° ${numeroOrdre(commande)}`;
+
+    const reference = document.createElement("small");
+    reference.className = "order-ref";
+    reference.textContent = commande.numero_commande || "";
+
+    numeroCell.append(numeroOrdreTexte, reference);
+    row.appendChild(numeroCell);
 
     // Client
     const clientCell = document.createElement("td");
@@ -530,7 +554,8 @@ function filtrerCommandes() {
       statut === "tous" || commande.statut === statut;
 
     const texte = [
-      commande.numero,
+      numeroOrdre(commande),
+      commande.numero_commande,
       commande.nom_client,
       commande.telephone,
       commande.adresse
@@ -584,6 +609,8 @@ async function chargerCommandes() {
     if (error) throw error;
 
     toutesLesCommandes = data || [];
+
+    calculerNumerosAffiches();
 
     filtrerCommandes();
 

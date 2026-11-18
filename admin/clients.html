@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clients | KBC Admin</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <header class="admin-header">
+    <a href="dashboard.html" class="admin-brand">KBC <span>ADMIN</span></a>
+    <div class="admin-user">
+      <span id="admin-name" style="display: none;">Chargement...</span>
+      <button id="logout-button" class="logout-button" type="button">Déconnexion</button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <a href="dashboard.html">Tableau de bord</a>
+      <a href="produits.html">Produits</a>
+      <a href="stocks.html">Gestion des stocks</a>
+      <a href="commandes.html">Commandes</a>
+      <a href="ventes.html">Ventes</a>
+      <a class="active" href="clients.html">Clients</a>
+      <a href="statistiques.html">Statistiques</a>
+      <a href="../index.html">Voir la boutique</a>
+    </aside>
+
+    <main class="dashboard-content">
+      <h1>Clients</h1>
+      <p class="dashboard-subtitle">Les personnes qui ont commandé, regroupées par numéro de téléphone.</p>
+
+      <p id="clients-message" class="orders-message" role="status">Chargement des clients...</p>
+
+      <div id="clients-body">
+
+        <section class="st-kpis cl-kpis" aria-label="Résumé des clients">
+          <article class="st-kpi main">
+            <p>Clients</p>
+            <h2 id="kpi-clients">—</h2>
+            <span class="st-sub" id="kpi-clients-sub"></span>
+          </article>
+          <article class="st-kpi">
+            <p>Nouveaux (30 jours)</p>
+            <h2 id="kpi-new">—</h2>
+            <span class="st-sub">première commande récente</span>
+          </article>
+          <article class="st-kpi">
+            <p>Clients fidèles</p>
+            <h2 id="kpi-loyal">—</h2>
+            <span class="st-sub" id="kpi-loyal-sub"></span>
+          </article>
+          <article class="st-kpi">
+            <p>Dépense moyenne</p>
+            <h2 id="kpi-avg">—</h2>
+            <span class="st-sub">par client (hors annulées)</span>
+          </article>
+        </section>
+
+        <section class="st-card cl-panel">
+          <div class="orders-toolbar cl-filters">
+            <input type="search" id="search-clients" placeholder="Rechercher : nom, téléphone, ville..." aria-label="Rechercher un client">
+
+            <select id="filter-segment" aria-label="Segment">
+              <option value="tous">Tous les clients</option>
+              <option value="nouveau">Nouveaux (30 jours)</option>
+              <option value="fidele">Fidèles (2 commandes ou plus)</option>
+              <option value="inactif">Inactifs (plus de 90 jours)</option>
+              <option value="sans_achat">Sans achat (commandes annulées)</option>
+            </select>
+
+            <select id="filter-ville" aria-label="Ville">
+              <option value="">Toutes les villes</option>
+            </select>
+
+            <select id="sort-clients" aria-label="Trier par">
+              <option value="depense">Plus gros acheteurs</option>
+              <option value="commandes">Plus de commandes</option>
+              <option value="recent">Dernière commande</option>
+              <option value="nom">Nom (A → Z)</option>
+            </select>
+
+            <button type="button" class="st-btn light" id="export-csv">Exporter CSV</button>
+          </div>
+
+          <div class="st-empty" id="empty-state" hidden>
+            <h2>Aucun client ne correspond</h2>
+            <p>Modifiez la recherche ou les filtres.</p>
+          </div>
+
+          <div class="table-wrapper" id="clients-table-wrap">
+            <table class="orders-table cl-table">
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Ville</th>
+                  <th class="cl-center">Commandes</th>
+                  <th class="vt-right">Total dépensé</th>
+                  <th class="vt-right">Panier moyen</th>
+                  <th>Dernière commande</th>
+                  <th>Profil</th>
+                </tr>
+              </thead>
+              <tbody id="clients-table-body"></tbody>
+            </table>
+          </div>
+
+          <div class="vt-pager" id="pager">
+            <button type="button" class="st-btn light" id="page-prev">Précédent</button>
+            <span id="page-info"></span>
+            <button type="button" class="st-btn light" id="page-next">Suivant</button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Fiche client -->
+  <dialog id="client-dialog" class="cl-dialog" aria-labelledby="dialog-name">
+    <div class="cl-dialog-head">
+      <div>
+        <h2 id="dialog-name"></h2>
+        <p id="dialog-sub"></p>
+      </div>
+      <button type="button" class="cl-close" id="dialog-close" aria-label="Fermer">×</button>
+    </div>
+
+    <div class="cl-contact">
+      <a id="dialog-call" class="st-btn light" href="#">Appeler</a>
+      <a id="dialog-wa" class="st-btn" href="#" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    </div>
+
+    <dl class="cl-facts" id="dialog-facts"></dl>
+
+    <h3>Produits achetés</h3>
+    <ul class="cl-products" id="dialog-products"></ul>
+
+    <h3>Commandes</h3>
+    <div class="table-wrapper">
+      <table class="orders-table cl-orders">
+        <thead>
+          <tr><th>Date</th><th>Référence</th><th>Statut</th><th class="vt-right">Montant</th></tr>
+        </thead>
+        <tbody id="dialog-orders"></tbody>
+      </table>
+    </div>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/clients.js"></script>
+</body>
+</html>

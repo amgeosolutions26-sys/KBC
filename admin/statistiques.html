@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistiques | KBC Admin</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <header class="admin-header">
+    <a href="dashboard.html" class="admin-brand">KBC <span>ADMIN</span></a>
+    <div class="admin-user">
+      <span id="admin-name" style="display: none;">Chargement...</span>
+      <button id="logout-button" class="logout-button">Déconnexion</button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <a href="dashboard.html">Tableau de bord</a>
+      <a href="produits.html">Produits</a>
+      <a href="stocks.html">Gestion des stocks</a>
+      <a href="commandes.html">Commandes</a>
+      <a href="ventes.html">Ventes</a>
+      <a href="clients.html">Clients</a>
+      <a class="active" href="statistiques.html">Statistiques</a>
+      <a href="../index.html">Voir la boutique</a>
+    </aside>
+
+    <main class="dashboard-content">
+      <div class="st-print-title">
+        <strong>KBC – Khar Yalla Business Center</strong>
+        <span id="print-subtitle"></span>
+      </div>
+
+      <h1>Statistiques</h1>
+      <p class="dashboard-subtitle">Performance de votre boutique : ventes, produits, clients et stocks.</p>
+
+      <p id="stats-message" role="status"></p>
+
+      <div class="st-toolbar">
+        <div class="st-periods" role="group" aria-label="Période">
+          <button type="button" data-periode="7" aria-pressed="false">7 jours</button>
+          <button type="button" data-periode="30" aria-pressed="true">30 jours</button>
+          <button type="button" data-periode="90" aria-pressed="false">3 mois</button>
+          <button type="button" data-periode="365" aria-pressed="false">12 mois</button>
+          <button type="button" data-periode="tout" aria-pressed="false">Tout</button>
+        </div>
+
+        <div class="st-actions">
+          <label class="st-switch">
+            <input type="checkbox" id="demo-toggle">
+            <span class="st-switch-track" aria-hidden="true"></span>
+            <span>Données de démonstration</span>
+          </label>
+          <button type="button" class="st-btn light" id="export-csv">Exporter CSV</button>
+          <button type="button" class="st-btn" id="print-report">Imprimer / PDF</button>
+        </div>
+      </div>
+
+      <div class="st-demo-banner" id="demo-banner" hidden>
+        <strong>Mode démonstration.</strong> Ces chiffres sont fictifs et ne reflètent pas l'activité réelle de la boutique.
+      </div>
+
+      <div class="st-empty" id="empty-state" hidden>
+        <h2>Pas encore de commandes sur cette période</h2>
+        <p>Les statistiques apparaîtront dès les premières commandes. Pour voir à quoi ressemblera la page, activez les données de démonstration.</p>
+      </div>
+
+      <div id="stats-body">
+
+        <section class="st-kpis" aria-label="Indicateurs clés">
+          <article class="st-kpi main">
+            <p>Chiffre d'affaires</p>
+            <h2 id="kpi-ca">—</h2>
+            <span class="st-delta" id="delta-ca"></span>
+          </article>
+          <article class="st-kpi">
+            <p>Commandes</p>
+            <h2 id="kpi-commandes">—</h2>
+            <span class="st-delta" id="delta-commandes"></span>
+          </article>
+          <article class="st-kpi">
+            <p>Panier moyen</p>
+            <h2 id="kpi-panier">—</h2>
+            <span class="st-delta" id="delta-panier"></span>
+          </article>
+          <article class="st-kpi">
+            <p>Articles vendus</p>
+            <h2 id="kpi-articles">—</h2>
+            <span class="st-sub" id="sub-articles"></span>
+          </article>
+          <article class="st-kpi">
+            <p>Clients</p>
+            <h2 id="kpi-clients">—</h2>
+            <span class="st-sub" id="sub-clients"></span>
+          </article>
+          <article class="st-kpi warn">
+            <p>Taux d'annulation</p>
+            <h2 id="kpi-annul">—</h2>
+            <span class="st-sub" id="sub-annul"></span>
+          </article>
+        </section>
+
+        <section class="st-highlights" id="highlights" aria-label="Points clés"></section>
+
+        <section class="st-grid">
+          <article class="st-card c8">
+            <div class="st-card-head">
+              <h2>Évolution du chiffre d'affaires</h2>
+              <span class="st-note" id="chart-note"></span>
+            </div>
+            <div id="chart-ca" class="st-chart"></div>
+          </article>
+
+          <article class="st-card c4">
+            <div class="st-card-head"><h2>État des commandes</h2></div>
+            <div id="chart-statuts" class="st-donut-wrap"></div>
+          </article>
+
+          <article class="st-card c6">
+            <div class="st-card-head"><h2>Produits les plus vendus</h2></div>
+            <div id="top-produits" class="st-bars"></div>
+          </article>
+
+          <article class="st-card c6">
+            <div class="st-card-head"><h2>Ventes par catégorie</h2></div>
+            <div id="top-categories" class="st-bars"></div>
+          </article>
+
+          <article class="st-card c4">
+            <div class="st-card-head"><h2>Modes de paiement</h2></div>
+            <div id="top-paiements" class="st-bars"></div>
+          </article>
+
+          <article class="st-card c4">
+            <div class="st-card-head"><h2>Villes de livraison</h2></div>
+            <div id="top-villes" class="st-bars"></div>
+          </article>
+
+          <article class="st-card c4">
+            <div class="st-card-head">
+              <h2>Alertes de stock</h2>
+              <a href="stocks.html" class="st-link">Gérer</a>
+            </div>
+            <ul id="stock-alertes" class="st-alerts"></ul>
+          </article>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/statistiques.js"></script>
+</body>
+</html>
